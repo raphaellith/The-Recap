@@ -1,0 +1,40 @@
+{
+    "subscribers": {
+        "user123": {
+            "first_name": "John",
+            "email": "john.doe@example.com",
+            "topics": [
+                "Science and tech",
+                "Sports"
+            ],
+            "subscribed": true
+        },
+        "user124": {
+            "first_name": "Jane",
+            "email": "jane.smith@example.com",
+            "topics": [
+                "Culture and entertainment",
+                "Science and tech"
+            ],
+            "subscribed": true
+        },
+        "user001": {
+            "first_name": "John",
+            "email": "john.doe@example.com",
+            "topics": [
+                "technology",
+                "business"
+            ],
+            "subscribed": true
+        },
+        "anotherperson": {
+            "first_name": "John",
+            "email": "john.doe@example.com",
+            "topics": [
+                "technology",
+                "business"
+            ],
+            "subscribed": true
+        }
+    }
+}
