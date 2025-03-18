@@ -61,6 +61,10 @@ class BBCScraper(Scraper):
 
     def get_title_link_pairs(self, topic) -> [(str, str)]:
         assert topic in SUPPORTED_TOPICS
+
+        if topic == "culture":
+            topic = "entertainment_and_arts"
+
         url = f"https://www.bbc.co.uk/news/{topic}"
         page = requests.get(url)
         soup = BeautifulSoup(page.text, 'html.parser')

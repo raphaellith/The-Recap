@@ -4,6 +4,7 @@ from scraper import TheGuardianScraper, BBCScraper
 
 HEADLINES_FILE = "headlines.json"
 
+
 def load_headlines():
     """Load existing headlines from JSON file."""
     if not os.path.exists(HEADLINES_FILE):
@@ -11,10 +12,12 @@ def load_headlines():
     with open(HEADLINES_FILE, "r") as file:
         return json.load(file)
 
+
 def save_headlines(data):
     """Save headlines to JSON file."""
     with open(HEADLINES_FILE, "w") as file:
         json.dump(data, file, indent=4)
+
 
 def add_headline(topic, source, headline, url):
     """Add a headline to the JSON file, avoiding duplicates."""
@@ -31,6 +34,7 @@ def add_headline(topic, source, headline, url):
         print(f"Added headline: {headline}")
     else:
         print(f"Duplicate headline skipped: {headline}")
+
 
 def scrape_headlines():
     """Scrape headlines using The Guardian and BBC scrapers."""
@@ -50,6 +54,7 @@ def scrape_headlines():
             add_headline(topic, "BBC", headline, url)
 
     print("Scraping complete. Headlines saved to headlines.json.")
+
 
 if __name__ == "__main__":
     scrape_headlines()
