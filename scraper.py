@@ -12,12 +12,15 @@ SUPPORTED_TOPICS = [
 
 
 class Scraper:
-    def __init__(self):
-        pass
-
-    def get_title_link_pairs(self, topic: str) -> [(str, str)]:  # ABSTRACT
+    def __init__(self, source_name):
         """
-        Given a topic, returns a list of (title, link) pairs scraped from the site.
+        self.source_name is the name of the news source.
+        """
+        self.source_name = source_name
+
+    def get_title_url_pairs(self, topic: str) -> [(str, str)]:  # ABSTRACT
+        """
+        Given a topic, returns a list of (title, url) pairs scraped from the site.
         The topic is a string that must be one of the SUPPORTED_TOPICS. See above.
         """
         raise NotImplementedError("get_title_link_pairs() is abstract and should be implemented!")
@@ -26,7 +29,7 @@ class Scraper:
         """
         Given a topic, returns a list of titles scraped from the site.
         """
-        return list(list(zip(*self.get_title_link_pairs(topic=topic)))[0])
+        return list(list(zip(*self.get_title_url_pairs(topic=topic)))[0])
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -34,9 +37,9 @@ class Scraper:
 
 class TheGuardianScraper(Scraper):
     def __init__(self):
-        super().__init__()
+        super().__init__(source_name="The Guardian")
 
-    def get_title_link_pairs(self, topic) -> [(str, str)]:
+    def get_title_url_pairs(self, topic) -> [(str, str)]:
         assert topic in SUPPORTED_TOPICS
         url = f"https://www.theguardian.com/{topic}/all"
         page = requests.get(url)
@@ -57,9 +60,9 @@ class TheGuardianScraper(Scraper):
 
 class BBCScraper(Scraper):
     def __init__(self):
-        super().__init__()
+        super().__init__(source_name="BBC")
 
-    def get_title_link_pairs(self, topic) -> [(str, str)]:
+    def get_title_url_pairs(self, topic) -> [(str, str)]:
         assert topic in SUPPORTED_TOPICS
 
         if topic == "culture":
@@ -73,13 +76,13 @@ class BBCScraper(Scraper):
 
         for a_tag in soup.find_all("a"):
             if a_tag.get('href') is not None:
-                link = a_tag.get('href')
-                if link.startswith('/news'):
+                headline_url = a_tag.get('href')
+                if headline_url.startswith('/news'):
                     children = a_tag.find_all("span")
                     for child in children:
                         if child.get('aria-hidden') == 'false':
                             title = child.text
-                            link = 'https://www.bbc.co.uk' + link
-                            result.append((title, link))
+                            headline_url = 'https://www.bbc.co.uk' + headline_url
+                            result.append((title, headline_url))
 
         return result
