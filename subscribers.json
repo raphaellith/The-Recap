@@ -4,8 +4,7 @@
             "first_name": "John",
             "email": "john.doe@example.com",
             "topics": [
-                "Science and tech",
-                "Sports"
+                "technology"
             ],
             "subscribed": true
         },
@@ -13,8 +12,8 @@
             "first_name": "Jane",
             "email": "jane.smith@example.com",
             "topics": [
-                "Culture and entertainment",
-                "Science and tech"
+                "culture",
+                "technology"
             ],
             "subscribed": true
         },
