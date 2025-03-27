@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
 
-from scraper import BBCScraper, TheGuardianScraper
+from Scrapers import BBCScraper, TheGuardianScraper
 
 
 def clean_and_tokenize(headlines):
