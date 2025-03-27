@@ -1,0 +1,66 @@
+import json
+
+with open('data.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+# style of the HTML email
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #333;
+        }
+        h3 {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #555;
+        }
+        ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+"""
+
+for category, outlets in data.items():
+    # output the category heading
+    html_content += f"<h2>{category.capitalize()}</h2>"
+    
+    for outlet, articles in outlets.items():
+        # output the news outlet as a subheading
+        html_content += f"<h3>{outlet}</h3><ul>"
+        
+        for article in articles:
+            title = article["title"]
+            url = article["url"]
+            html_content += f'<li><a href="{url}">{title}</a></li>'
+        html_content += "</ul>"
+
+# close the html tags
+html_content += """
+</body>
+</html>
+"""
+
+with open('email_content.html', 'w', encoding='utf-8') as file:
+    file.write(html_content)
