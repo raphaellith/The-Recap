@@ -1,6 +1,8 @@
 import os
 import json
-from Scrapers import TheGuardianScraper, BBCScraper, SUPPORTED_TOPICS
+from Scrapers.TheGuardianScraper import TheGuardianScraper
+from Scrapers.BBCScraper import BBCScraper
+from Scrapers.Scraper import SUPPORTED_TOPICS
 
 
 class HeadlineJsonEditor:
